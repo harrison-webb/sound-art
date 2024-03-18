@@ -10,6 +10,7 @@ volatile byte state = LOW;
 
 void setup()
 {
+  state = LOW;
   tmrpcm.speakerPin=9;
 
   Serial.begin(9600);
@@ -22,24 +23,24 @@ void setup()
   tmrpcm.setVolume(6);
 
   pinMode(interruptPin, INPUT);
-  attachInterrupt(digitalPinToInterrupt(interruptPin), blink, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(interruptPin), blink, RISING);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   if(state)
     {
-    tmrpcm.play("bknf.wav"); //big speaker
+    tmrpcm.play("tnor.wav"); //big speaker
 
     delay(10909);
-    Serial.println("speaker 1");
+    Serial.println("speaker 2");
 
     tmrpcm.stopPlayback();
     }
 }
 
 void blink() {
-  state = !state;
+  state = HIGH;
 }
 
 
