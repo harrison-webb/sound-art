@@ -14,3 +14,7 @@ Order:
 - flash it
 - connect the others
 - press button for 3s on master then let go
+
+# Media
+![img1](./IMG_3756.jpeg)
+![img2](./IMG_3759.jpeg)
