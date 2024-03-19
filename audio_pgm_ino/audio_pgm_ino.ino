@@ -8,15 +8,15 @@ const byte nano1 = 7;
 const byte nano2 = 8;
 const byte nano3 = 6;
 
-bool flag = true;
-
 const byte interruptPin = 2;
-// const byte interruptPin2 = 3;
 volatile byte state = LOW;
+volatile bool startFlag = false;
 
 void setup()
 {
+  startFlag = false;
   state = LOW;
+
   tmrpcm.speakerPin=9;
 
   Serial.begin(9600);
@@ -29,35 +29,39 @@ void setup()
   tmrpcm.setVolume(6);
 
   /* interrupt setup */
-  pinMode(nano1 , OUTPUT);
-  pinMode(nano2 , OUTPUT);
-  pinMode(nano3 , OUTPUT);
+  pinMode(nano1, OUTPUT);
+  pinMode(nano2, OUTPUT);
+  pinMode(nano3, OUTPUT);
 
   pinMode(interruptPin, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(interruptPin), blink, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(interruptPin), blink, RISING);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  tmrpcm.play("chrd.wav");
-  delay(10909);
-  Serial.println("speaker 1");
+  if(startFlag){
+    tmrpcm.play("chrd.wav");
+    delay(10909);
+    // Serial.println("main 1");
 
-  tmrpcm.stopPlayback();
+    tmrpcm.stopPlayback();
 
-  if (flag) {
-    blink();
-    flag = false;
+    // Serial.println(startFlag);
+    
+    state = HIGH;
+    digitalWrite(nano1, state);
+    digitalWrite(nano2, state);
+    digitalWrite(nano3, state);
+    // delay(200);
   }
-  // delay(1000);
+  // delay(2000);
+  // Serial.println("i'm in the loop");
+
 }
 
 void blink() {
-  state = !state;
-  // digitalWrite(ledPin, state);
-  digitalWrite(nano1, state);
-  digitalWrite(nano2, state);
-  digitalWrite(nano3, state);
+  startFlag = true;
+    // Serial.println("startflag method");
 }
 
 
