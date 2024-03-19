@@ -6,3 +6,11 @@
 # Resources
 - https://www.youtube.com/watch?v=UN9XPWHamHw
 - https://utah.instructure.com/courses/929060/files/159182288?wrap=1
+
+
+# Setup
+Order:
+- Connect master arduino
+- flash it
+- connect the others
+- press button for 3s on master then let go
