@@ -10,8 +10,8 @@ volatile byte state = LOW;
 
 void setup()
 {
-  state = LOW;
   tmrpcm.speakerPin=9;
+  state = LOW;
 
   Serial.begin(9600);
 
@@ -23,7 +23,7 @@ void setup()
   tmrpcm.setVolume(6);
 
   pinMode(interruptPin, INPUT);
-  attachInterrupt(digitalPinToInterrupt(interruptPin), blink, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(interruptPin), blink, RISING);
 }
 
 void loop() {
@@ -33,14 +33,14 @@ void loop() {
     tmrpcm.play("bass.wav"); //big speaker
 
     delay(10909);
-    Serial.println("speaker 1");
+    Serial.println("speaker bass");
 
     tmrpcm.stopPlayback();
     }
 }
 
 void blink() {
-  state = !state;
+  state = HIGH;
 }
 
 
