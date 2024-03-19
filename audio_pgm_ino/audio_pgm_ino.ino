@@ -51,7 +51,7 @@ void loop() {
     state = HIGH;
     digitalWrite(nano1, state);
     digitalWrite(nano2, state);
-    digitalWrite(nano2, state);
+    digitalWrite(nano3, state);
     // delay(200);
   }
   // delay(2000);
